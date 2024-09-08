@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
+
+    {% block extra-head %}{% endblock %}
+</head>
+<body style="direction: rtl">
+{% include 'components/header.html' %}
+<main class="max-w-[1920px] mt-16 py-5 mx-auto min-h-[80vh]">
+    <div class="mb-40">{% include 'components/slider.html' %}</div>
+
+    {% block content %}{% endblock %}
+
+</main>
+{% include  'components/footer.html' %}
+{% block extera-footer %}{% endblock %}
+</body>
+{% block script %}{% endblock %}
+</html>
