@@ -1,0 +1,38 @@
+{% extends '_base.html' %}
+{% block title %}
+    product detail
+{% endblock %}
+
+{% block content %}
+    
+        <div id="product" class=""></div>
+        <div id="technical" class=""></div>
+        <div id="propose_product" class=""></div>
+        <div id="comment" class=""></div>
+
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        let id = {{pk}}
+        {% include 'jsProductView/productDetailOne.js' %}
+        {% include 'jsProductView/technicalProduct.js' %}
+        function plus() {
+            var preValue = document.getElementById("counter").value;
+            document.getElementById("counter").value = parseInt(preValue) + 1;
+        }
+
+        function minus() {
+            var preValue = document.getElementById("counter").value;
+            if (parseInt(preValue) != 0) {
+                document.getElementById("counter").value = parseInt(preValue) - 1;
+            }
+        }
+
+        function rotate() {
+            document.getElementById("rotateSVG").classList.toggle("rotate-180");
+        }
+
+    </script>
+{% endblock %}

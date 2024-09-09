@@ -8,7 +8,7 @@ class Product(models.Model):
     model_production = models.CharField(max_length=150, null=False)
     price = models.IntegerField(null=False, default=0)
     stock = models.IntegerField(null=False, default=0)
-    description = models.TextField(null=True, blank=True)
+    short_description = models.TextField(max_length=350, null=True, blank=True)
     picture = models.ImageField(upload_to='products/', null=True, blank=True)
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, related_name='categorys',
                                  null=True, blank=True, related_query_name='category')
@@ -35,18 +35,63 @@ class Product(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=150, unique=True, null=False)
-    father_category = models.ForeignKey("Category", on_delete=models.CASCADE, null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    deleted = models.BooleanField(default=False)
-
-    def __str__(self):
-        return f'name:{self.name}-created_at:{self.created_at.strftime('%Y%m%d%H:%M:%S')}-deleted:{self.deleted}'
+    name = models.CharField(max_length=255, unique=True)
+    parent_category = models.ForeignKey(
+        'self', on_delete=models.CASCADE, null=True, blank=True, related_name='subcategories'
+    )
 
     class Meta:
 
-        verbose_name = 'category'
-        verbose_name_plural = 'categories'
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+
+    def __str__(self):
+
+        return self.name
+
+    @staticmethod
+    def calculate_max_depth(root_category):
+
+        """
+        Recursively calculates the maximum depth of the category tree starting from a given root category.
+        """
+
+        if not root_category.subcategories.exists():
+            return 0
+        else:
+            return 1 + max(Category.calculate_max_depth(sub) for sub in root_category.subcategories.all())
+
+    def get_descendants(self, include_self=False, levels=None):
+
+        """
+        Fetch all descendants of the current category using dynamically determined levels of prefetching.
+        If 'levels' is not provided, calculate it based on the maximum depth of the category tree.
+        """
+
+        if levels is None:
+            levels = Category.calculate_max_depth(self)
+
+        result = [self] if include_self else []
+        queryset = Category.objects.all()
+
+        for _ in range(levels):
+
+            queryset = queryset.prefetch_related('subcategories')
+
+        categories = queryset.filter(id=self.id)
+
+        # noinspection PyShadowingNames
+        def collect_categories(category, current_level):
+
+            if current_level > 0:
+                for subcategory in category.subcategories.all():
+                    result.append(subcategory)
+                    collect_categories(subcategory, current_level - 1)
+
+        for category in categories:
+            collect_categories(category, levels)
+
+        return result
 
 
 class Brand(models.Model):
@@ -58,7 +103,6 @@ class Brand(models.Model):
         return f'name:{self.name}-category:{self.category}'
 
     class Meta:
-
         verbose_name = 'brand'
         verbose_name_plural = 'brands'
 
@@ -67,5 +111,3 @@ class Technical_Characteristics(models.Model):
     description = models.TextField(null=True, blank=True)
     active = models.BooleanField(default=True)
     deleted = models.BooleanField(default=False)
-
-

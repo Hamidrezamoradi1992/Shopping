@@ -11,7 +11,7 @@ class ProductSerializer(serializers.ModelSerializer):
             'name',
             'price',
             'stock',
-            'description',
+            'short_description',
             'picture',
             'category',
             'brands',
@@ -25,7 +25,6 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields=[
             'name',
-            'father_category'
         ]
 
 class BrandSerializer(serializers.ModelSerializer):
@@ -33,7 +32,6 @@ class BrandSerializer(serializers.ModelSerializer):
         model = Brand
         fields=[
             'name',
-            'category'
         ]
 
 

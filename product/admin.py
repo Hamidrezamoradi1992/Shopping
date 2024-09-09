@@ -15,8 +15,8 @@ class ProductAdmin(admin.ModelAdmin):
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     model = Category
-    list_display = ('name', 'created_at')
-    list_filter = ('name', 'deleted')
+    list_display = ['name']
+    list_filter = ['name']
 
 
 @admin.register(Brand)

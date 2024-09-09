@@ -1,19 +1,23 @@
 <div class="navbar bg-base-100" style="direction: ltr">
-  <div class="flex-1">
-    <a class="btn btn-ghost text-xl">Blog Platform</a>
-  </div>
-  <div class="flex-none">
-    <ul class="menu menu-horizontal px-1">
-      <li><a>Link</a></li>
-      <li>
-        <details>
-          <summary>Parent</summary>
-          <ul class="bg-base-100 rounded-t-none p-2">
-            <li><a>Link 1</a></li>
-            <li><a>Link 2</a></li>
-          </ul>
-        </details>
-      </li>
-    </ul>
-  </div>
+    <div class="flex-1">
+        <a class="btn btn-ghost text-xl">Blog Platform</a>
+    </div>
+    <div class="flex-none">
+        <ul class="menu menu-horizontal px-1">
+            <li>
+                <details>
+                    <summary>Parent</summary>
+                    <ul class="menu bg-base-200 rounded-box w-48">
+                        {% for i in categories %}
+                            <li><a>{{ i.name }} </a></li>
+                        {% endfor %}
+                    </ul>
+                </details>
+            </li>
+            {% for i in menu %}
+                <li><a href="{{ i.link }}">{{ i.title }}</a></li>
+            {% endfor %}
+
+        </ul>
+    </div>
 </div>

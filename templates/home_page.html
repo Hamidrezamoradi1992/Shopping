@@ -1,12 +1,15 @@
 {% extends '_base.html' %}
 {% block title %}
-	home
+    home
 {% endblock %}
 {% block content %}
-	
+     <div class="mb-40">{% include 'components/slider.html' %}</div>
     <div id="container" class="flex justify-center aline-center"></div>
 {% endblock %}
 
 {% block script %}
-	
+    <script>
+        {% include 'jsProductView/allProduct.js' %}
+        {% include 'jsProductView/slider.js' %}
+    </script>
 {% endblock %}

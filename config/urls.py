@@ -24,4 +24,4 @@ from product import apps
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('product.urls')),
-]+ static(settings.MEDIA_URL,ducument_root=settings.MEDIA_ROOT)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -8,14 +8,14 @@
     <title>{% block title %}{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css"/>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.2.3/dist/cdn.min.js"></script>
 
     {% block extra-head %}{% endblock %}
 </head>
-<body style="direction: rtl">
+<body >
 {% include 'components/header.html' %}
 <main class="max-w-[1920px] mt-16 py-5 mx-auto min-h-[80vh]">
-    <div class="mb-40">{% include 'components/slider.html' %}</div>
+   
 
     {% block content %}{% endblock %}
 
@@ -23,5 +23,7 @@
 {% include  'components/footer.html' %}
 {% block extera-footer %}{% endblock %}
 </body>
+
 {% block script %}{% endblock %}
+
 </html>
