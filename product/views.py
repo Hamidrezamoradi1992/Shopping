@@ -21,7 +21,16 @@ def product_list_view(request):
 
 
 def category_list_view(request, category_id):
-    pass
+    category = get_object_or_404(Category, pk=category_id)
+    if request.method == 'GET':
+        product_category=category.get_descendants(include_self=True)
+        product=Product.objects.filter(active=True, category__in=product_category)
+        return render(request,'category.html',{
+            'category':category ,'all_product_category':product})
+
+
+
+
 
 def detail_product_view(request,pk):
     return render(request,'product_detaile.html',{"pk":pk})
@@ -31,6 +40,7 @@ def product_detail_view(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     category = product.category.name
     print(product.category.get_descendants(include_self=True))
+    print()
     if request.method == 'GET':
         serializer = ProductSerializer(product)
         return Response({'product_data': serializer.data,'category': category,})

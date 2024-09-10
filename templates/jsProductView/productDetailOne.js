@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
     }).then(async (response)=>{
         const productes=await response.json()
         console.log(productes.product_data)
+        let descriptionss=""
+        if (productes.product_data.short_description != null) {descriptionss = productes.product_data.short_description}else {descriptionss=""}
         products.innerHTML=`
                         <div class="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
             <div class="flex justify-center items-center lg:flex-row flex-col gap-8">
@@ -30,26 +32,9 @@ document.addEventListener('DOMContentLoaded', function (event) {
                         <p class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 font-normal text-base leading-4 text-gray-700 hover:underline hover:text-gray-800 dark:text-white duration-100 cursor-pointer">22 reviews</p>
                     </div>
 <!--  serch and fibished -->
-                    <p class="font-normal text-base leading-6 text-gray-600  mt-7">  ${productes.product_data.short_description}</p> 
+                    <p class="font-normal text-base leading-6 text-gray-600  mt-7">  ${descriptionss}</p> 
                     <p class="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 mt-6 dark:text-white">ریال ${productes.product_data.price}</p>
-<!--      select quantity-->
-<!--                    <div class="lg:mt-11 mt-10">-->
-<!--                        <div class="flex flex-row justify-between">-->
-<!--                            <p class="font-medium text-base leading-4 text-gray-600 ">Select quantity</p>-->
-<!--                            <div class="flex">-->
-<!--                                <span onclick="minus()" class="focus:outline-none dark:text-white focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer border border-gray-300 border-r-0 w-7 h-7 flex items-center justify-center pb-1">-</span>-->
-<!--                                <input id="counter" aria-label="input" class="border dark:text-white border-gray-300 dark:bg-transparent h-full text-center w-14 pb-1" type="text" value="1" />-->
-<!--                                <span onclick="plus()" class="focus:outline-none dark:text-white focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer border border-gray-300 border-l-0 w-7 h-7 flex items-center justify-center pb-1">+</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <hr class="bg-gray-200 w-full my-2" />-->
-<!--                        <div class="flex flex-row justify-between items-center mt-4">-->
-<!--                            <p class="font-medium text-base leading-4 text-gray-600 ">Dimensions</p>-->
-<!--                            <img onclick="rotate()" id="rotateSVG" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer transform duration-100  dark:hidden" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/svg4.svg" alt="dropdown">-->
-<!--                            <img onclick="rotate()" id="rotateSVG" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer transform duration-100 hidden dark:block" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/svg4dark.svg" alt="dropdown">-->
-<!--                        </div>-->
-<!--                        <hr class="bg-gray-200 w-full mt-4" />-->
-<!--                    </div>-->
+
       
                     <button class="focus:outline-none focus:ring-2 hover:bg-black focus:ring-offset-2 focus:ring-gray-800 font-medium text-base leading-4 text-white bg-gray-800 w-full py-5 lg:mt-12 mt-6 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100">Add to shopping bag (coming sune)</button>
                 </div>
@@ -78,3 +63,27 @@ document.addEventListener('DOMContentLoaded', function (event) {
     })
 
 })
+
+
+
+
+
+      //
+      // select quantity
+      //               <div class="lg:mt-11 mt-10">
+// <!--                        <div class="flex flex-row justify-between">-->
+// <!--                            <p class="font-medium text-base leading-4 text-gray-600 ">Select quantity</p>-->
+// <!--                            <div class="flex">-->
+// <!--                                <span onclick="minus()" class="focus:outline-none dark:text-white focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer border border-gray-300 border-r-0 w-7 h-7 flex items-center justify-center pb-1">-</span>-->
+// <!--                                <input id="counter" aria-label="input" class="border dark:text-white border-gray-300 dark:bg-transparent h-full text-center w-14 pb-1" type="text" value="1" />-->
+// <!--                                <span onclick="plus()" class="focus:outline-none dark:text-white focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer border border-gray-300 border-l-0 w-7 h-7 flex items-center justify-center pb-1">+</span>-->
+// <!--                            </div>-->
+// <!--                        </div>-->
+// <!--                        <hr class="bg-gray-200 w-full my-2" />-->
+// <!--                        <div class="flex flex-row justify-between items-center mt-4">-->
+// <!--                            <p class="font-medium text-base leading-4 text-gray-600 ">Dimensions</p>-->
+// <!--                            <img onclick="rotate()" id="rotateSVG" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer transform duration-100  dark:hidden" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/svg4.svg" alt="dropdown">-->
+// <!--                            <img onclick="rotate()" id="rotateSVG" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer transform duration-100 hidden dark:block" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/svg4dark.svg" alt="dropdown">-->
+// <!--                        </div>-->
+// <!--                        <hr class="bg-gray-200 w-full mt-4" />-->
+// <!--                    </div>-->

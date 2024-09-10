@@ -1,15 +1,15 @@
 <div class="navbar bg-base-100" style="direction: ltr">
     <div class="flex-1">
-        <a class="btn btn-ghost text-xl">Blog Platform</a>
+        <a class="btn btn-ghost text-xl">shopping</a>
     </div>
     <div class="flex-none">
         <ul class="menu menu-horizontal px-1">
             <li>
                 <details>
                     <summary>Parent</summary>
-                    <ul class="menu bg-base-200 rounded-box w-48">
+                    <ul class="menu bg-black-200 rounded-box w-48 z-100">
                         {% for i in categories %}
-                            <li><a>{{ i.name }} </a></li>
+                            <li><a href="{% url 'cat' category_id=i.id %}">{{ i.name }} </a></li>
                         {% endfor %}
                     </ul>
                 </details>

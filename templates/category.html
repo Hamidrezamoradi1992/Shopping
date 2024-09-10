@@ -1,0 +1,26 @@
+{% extends '_base.html' %}
+{% block title %}
+	Category
+{% endblock %}
+{% block content %}
+    <div class="w-[80vw] h-auto grid grid-col-5 m-auto">
+	{% for product in all_product_category %}
+	    <a href="{% url 'product_detail_page' pk=product.id %}" target="_blank"> <div class="relative w-64 p-4 overflow-hidden bg-white shadow-lg rounded-2xl">
+                            <img alt="moto" src="{{ product.picture.url}}" class="absolute w-40 h-40 mb-4 -right-20 -bottom-8"/>
+                            <div class="w-4/6">
+                                <p class="mb-2 text-lg font-medium text-gray-800">
+                                    {{product.name|default:""}}
+                                </p>
+                                <p class="text-xs text-gray-400">
+                                    {{product.short_description|default:""}}
+                                </p>
+                                <p class="text-xl font-medium text-indigo-500">
+                                    ${{product.price}}
+                                </p>
+                            </div>
+                        </div>
+                       </a>
+        
+	{% endfor %}
+	</div>
+{% endblock %}
