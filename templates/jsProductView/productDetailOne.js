@@ -12,12 +12,16 @@ document.addEventListener('DOMContentLoaded', function (event) {
             'X-Requested-With': 'XMLHttpRequest',
             'X-CSRFToken': '{{ csrf_token }}'
         },
-    }).then(async (response)=>{
-        const productes=await response.json()
+    }).then(async (response) => {
+        const productes = await response.json()
         console.log(productes.product_data)
-        let descriptionss=""
-        if (productes.product_data.short_description != null) {descriptionss = productes.product_data.short_description}else {descriptionss=""}
-        products.innerHTML=`
+        let descriptionss = ""
+        if (productes.product_data.short_description != null) {
+            descriptionss = productes.product_data.short_description
+        } else {
+            descriptionss = ""
+        }
+        products.innerHTML = `
                         <div class="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
             <div class="flex justify-center items-center lg:flex-row flex-col gap-8">
                 <!-- Description Div -->
@@ -65,12 +69,9 @@ document.addEventListener('DOMContentLoaded', function (event) {
 })
 
 
-
-
-
-      //
-      // select quantity
-      //               <div class="lg:mt-11 mt-10">
+//
+// select quantity
+//               <div class="lg:mt-11 mt-10">
 // <!--                        <div class="flex flex-row justify-between">-->
 // <!--                            <p class="font-medium text-base leading-4 text-gray-600 ">Select quantity</p>-->
 // <!--                            <div class="flex">-->
