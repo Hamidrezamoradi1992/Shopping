@@ -8,14 +8,14 @@ from account.models import City, Country, Human
 class AccountAdmin(admin.ModelAdmin):
     model = Human
     list_display = ['name', 'family', 'age']
-    list_filter = ['city', 'country']
+    list_filter = ['age']
 
 
 @admin.register(City)
 class CityAdmin(admin.ModelAdmin):
     model = City
     list_display = ['name']
-    list_filter = ['country']
+    list_filter = ['name']
 
 
 @admin.register(Country)
