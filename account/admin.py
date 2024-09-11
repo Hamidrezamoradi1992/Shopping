@@ -1,14 +1,15 @@
 from django.contrib import admin
 
-from account.models import City,Country,Human
+from account.models import City, Country, Human
 
 
 # Register your models here.
 @admin.register(Human)
 class AccountAdmin(admin.ModelAdmin):
     model = Human
-    list_display = ['name','family','age']
-    list_filter = ['city','country']
+    list_display = ['name', 'family', 'age']
+    list_filter = ['city', 'country']
+
 
 @admin.register(City)
 class CityAdmin(admin.ModelAdmin):

@@ -7,10 +7,10 @@ function technicalProduct(value) {
                 'X-Requested-With': 'XMLHttpRequest',
                 'X-CSRFToken': '{{ csrf_token }}'
             }
-        }).then(async (response)=>{
+        }).then(async (response) => {
             const dataTechnical = await response.json()
             console.log(dataTechnical)
-            technical.innerHTML=`
+            technical.innerHTML = `
                 <div class="flex w-full flex-col items-center justify-center content-center">
                     <div class=" w-[90vw] card bg-base-300 rounded-box grid h-20 place-items-center p-51 h-auto">
                         ${dataTechnical.description}
@@ -18,9 +18,9 @@ function technicalProduct(value) {
                </div>
             `
         })
-    }else {
+    } else {
         console.log('reza')
-            technical.classList.toggle('!hidden')
+        technical.classList.toggle('!hidden')
     }
 
 

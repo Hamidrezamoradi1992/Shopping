@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     # extra app
     "rest_framework",
 
-
 ]
 
 MIDDLEWARE = [

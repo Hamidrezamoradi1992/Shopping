@@ -15,8 +15,8 @@ class Product(models.Model):
     brands = models.ForeignKey('Brand', on_delete=models.SET_NULL, related_name='brands', null=True, blank=True,
                                related_query_name='brand')
     technical = models.OneToOneField('Technical_Characteristics', on_delete=models.SET_NULL, related_name='technicals',
-                                  null=True,
-                                  blank=True, related_query_name='technical')
+                                     null=True,
+                                     blank=True, related_query_name='technical')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
