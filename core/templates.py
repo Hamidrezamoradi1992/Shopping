@@ -13,8 +13,3 @@ def menu_context_processor(request):
     }
 
 
-def slider_picture(request):
-    picture=Picture_Slider.objects.filter(active=True).values_list('picture')
-    return{
-        'pictures':picture
-    }

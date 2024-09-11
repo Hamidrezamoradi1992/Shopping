@@ -1,4 +1,5 @@
  document.addEventListener('alpine:init', () => {
+     fetch()
         Alpine.data('slider', () => ({
             currentIndex: 1,
             images: [

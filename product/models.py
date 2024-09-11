@@ -14,7 +14,7 @@ class Product(models.Model):
                                  null=True, blank=True, related_query_name='category')
     brands = models.ForeignKey('Brand', on_delete=models.SET_NULL, related_name='brands', null=True, blank=True,
                                related_query_name='brand')
-    technical = models.ForeignKey('Technical_Characteristics', on_delete=models.SET_NULL, related_name='technicals',
+    technical = models.OneToOneField('Technical_Characteristics', on_delete=models.SET_NULL, related_name='technicals',
                                   null=True,
                                   blank=True, related_query_name='technical')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -52,21 +52,12 @@ class Category(models.Model):
     @staticmethod
     def calculate_max_depth(root_category):
 
-        """
-        Recursively calculates the maximum depth of the category tree starting from a given root category.
-        """
-
         if not root_category.subcategories.exists():
             return 0
         else:
             return 1 + max(Category.calculate_max_depth(sub) for sub in root_category.subcategories.all())
 
     def get_descendants(self, include_self=False, levels=None):
-
-        """
-        Fetch all descendants of the current category using dynamically determined levels of prefetching.
-        If 'levels' is not provided, calculate it based on the maximum depth of the category tree.
-        """
 
         if levels is None:
             levels = Category.calculate_max_depth(self)
@@ -75,12 +66,10 @@ class Category(models.Model):
         queryset = Category.objects.all()
 
         for _ in range(levels):
-
             queryset = queryset.prefetch_related('subcategories')
 
         categories = queryset.filter(id=self.id)
 
-        # noinspection PyShadowingNames
         def collect_categories(category, current_level):
 
             if current_level > 0:
@@ -96,11 +85,10 @@ class Category(models.Model):
 
 class Brand(models.Model):
     name = models.CharField(max_length=150, unique=True, null=False)
-    category = models.ManyToManyField("Category")
     deleted = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'name:{self.name}-category:{self.category}'
+        return f'name:{self.name}'
 
     class Meta:
         verbose_name = 'brand'

@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
                     <div class="flex flex-row justify-between mt-5">
                        <img class="dark:hidden" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/productDetail4-svg1.svg" alt="stars">
                        <img class="hidden dark:block" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/productDetail4-svg1dark.svg" alt="stars">
-                        <p class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 font-normal text-base leading-4 text-gray-700 hover:underline hover:text-gray-800 dark:text-white duration-100 cursor-pointer">22 reviews</p>
+                        <p class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 font-normal text-base leading-4 text-gray-700 hover:underline hover:text-gray-800 dark:text-white duration-100 cursor-pointer">brand : ${productes.brand}</p>
                     </div>
 <!--  serch and fibished -->
                     <p class="font-normal text-base leading-6 text-gray-600  mt-7">  ${descriptionss}</p> 

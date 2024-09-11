@@ -12,7 +12,9 @@ function technicalProduct(value) {
             console.log(dataTechnical)
             technical.innerHTML=`
                 <div class="flex w-full flex-col items-center justify-center content-center">
-                    <div class=" w-[90vw] card bg-base-300 rounded-box grid h-20 place-items-center p-51 h-auto">${dataTechnical.description}</div>
+                    <div class=" w-[90vw] card bg-base-300 rounded-box grid h-20 place-items-center p-51 h-auto">
+                        ${dataTechnical.description}
+                      </div>
                </div>
             `
         })
