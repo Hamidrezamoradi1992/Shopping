@@ -14,3 +14,11 @@ def menu_context_processor(request):
         ],
         "categories": categories,
     }
+
+
+def slider_context_processor(request):
+    print(request.path)
+    picture = Picture_Slider.objects.filter(active=True)
+    return {
+        "picture_slider": picture
+}

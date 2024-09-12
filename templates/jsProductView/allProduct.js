@@ -15,7 +15,7 @@
 
                    const card=`
                    
-                       <a href="product/detail/${products[r].id}" target="_blank"> <div class="relative w-64 p-4 overflow-hidden bg-white shadow-lg rounded-2xl">
+                       <a href="product/detail/${products[r].id}" target="_blank"> <div class="relative w-64 h-36 p-4 overflow-hidden bg-white shadow-lg rounded-2xl">
                             <img alt="moto" src="${products[r].picture}" class="absolute w-40 h-40 mb-4 -right-20 -bottom-8"/>
                             <div class="w-4/6">
                                 <p class="mb-2 text-lg font-medium text-gray-800">

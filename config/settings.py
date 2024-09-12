@@ -71,6 +71,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'core.templates.menu_context_processor',
+                'core.templates.slider_context_processor',
             ],
         },
     },

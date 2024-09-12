@@ -14,7 +14,7 @@ def index(request):
 @api_view(['GET'])
 def product_list_view(request):
     if request.method == 'GET':
-        products = Product.objects.filter(active=True)
+        products = Product.objects.filter(active=True).order_by('category')
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     return Response(status=status.HTTP_400_BAD_REQUEST)

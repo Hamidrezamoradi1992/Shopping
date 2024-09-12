@@ -21,6 +21,8 @@ document.addEventListener('alpine:init', () => {
             currentIndex: 1,
             images: ["/media/slider/how-to-become-software-engineer.jpg",
                 "/media/slider/CDG_blog_post_image_02-2-850x412.jpg",
+                "/media/slider/DK-rebranding2.jpg",
+                "/media/slider/۲۵۸۵۱نتالبیس.webp",
             ],
             back() {
                 console.log()
