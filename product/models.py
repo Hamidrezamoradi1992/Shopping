@@ -4,7 +4,7 @@ from django.db import models
 # Create your models here.
 
 class Product(models.Model):
-    name = models.CharField(max_length=150, unique=True, null=False)
+    name = models.CharField(max_length=150, unique=False, null=False)
     model_production = models.CharField(max_length=150, null=False)
     price = models.IntegerField(null=False, default=0)
     stock = models.IntegerField(null=False, default=0)

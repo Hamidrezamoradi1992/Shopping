@@ -121,6 +121,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT_custom = BASE_DIR / 'static'
+if DEBUG:
+    STATICFILES_DIRS = [STATIC_ROOT_custom]
+else:
+    STATIC_ROOT = STATIC_ROOT_custom
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 # Default primary key field type

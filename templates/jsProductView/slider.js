@@ -1,5 +1,6 @@
+let image = []
 document.addEventListener('alpine:init', () => {
-    let image = []
+
     Alpine.data('slider', () => (
 
     fetch('accounts/api/slider', {

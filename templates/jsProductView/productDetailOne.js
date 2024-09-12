@@ -2,7 +2,8 @@ const products = document.querySelector("#product")
 const technical = document.querySelector("#technical")
 const propose = document.querySelector('#propose_product')
 const comment = document.querySelector("#comment")
-
+let pkCategory=0
+let pkProduct=0
 
 document.addEventListener('DOMContentLoaded', function (event) {
     event.preventDefault()
@@ -16,6 +17,9 @@ document.addEventListener('DOMContentLoaded', function (event) {
         const productes = await response.json()
         console.log(productes.product_data)
         let descriptionss = ""
+        pkProduct=productes.product_data.id
+        pkCategory=productes.product_data.category
+        console.log(pkCategory,pkProduct)
         if (productes.product_data.short_description != null) {
             descriptionss = productes.product_data.short_description
         } else {
@@ -64,7 +68,10 @@ document.addEventListener('DOMContentLoaded', function (event) {
         </div>
       
         `
-    })
+
+    }).catch((error)=>{console.log(error)
+    }).finally(()=>{ proposeView(pkCategory,pkProduct)})
+
 
 })
 

@@ -58,3 +58,14 @@ def technical_characteristics_list_view(request, product_id):
         print(serializer.data)
         return Response(serializer.data, status=status.HTTP_200_OK)
     return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def category_approachـproduct_list_view(request,category_id,product_id):
+
+    category=get_object_or_404(Category, pk=category_id)
+    if request.method=='GET':
+        product=Product.objects.filter(category_id=category_id).exclude(pk=product_id)[0:5:1]
+        serializer = ProductSerializer(product, many=True)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
