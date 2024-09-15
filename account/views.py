@@ -59,13 +59,13 @@ def loginUser(request):
     if request.method == 'POST':
         username = request.POST.get("username", None)
         password = request.POST.get("password", None)
-        if user := authenticate(username=username, password=password) and username and password:
+        if user := authenticate(request, username=username, password=password):
             login(request, user)
-            return redirect('index')
-        return Response({'message': 'username or password id not fond'}, status=status.HTTP_406_NOT_ACCEPTABLE)
-    return Response({"massage": 'bad request'}, status=status.HTTP_400_BAD_REQUEST)
+            return HttpResponse("welcome",status=201)
+        return HttpResponse({'username or password id not fond'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+    return HttpResponse({ 'bad request'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 def logoutUser(request):
     logout(request)
-    return redirect('index')
+    return redirect('/')

@@ -1,5 +1,5 @@
 function createUser() {
-    const formDate = document.querySelector('#signInform')
+    const formDate = document.querySelector('#signUpForm')
     let data = new FormData(formDate)
     console.log(data)
     fetch('accounts/api/createUser', {

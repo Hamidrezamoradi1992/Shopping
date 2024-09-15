@@ -9,7 +9,7 @@ def menu_context_processor(request):
         "menu": [
             dict(title="Home", link="/"),
             dict(title="About", link="/about-us/"),
-            dict(title="login/logout", link="/contact-us/"),
+
 
         ],
         "categories": categories,

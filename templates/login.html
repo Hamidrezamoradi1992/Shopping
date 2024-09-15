@@ -13,7 +13,7 @@
 <body>
 <div class="container" id="container">
     <div class="form-container sign-up-container">
-        <form action="#" id="signInform">
+        <form action="#" id="signUpForm">
             <h1>Create Account</h1>
             <div class="social-container">
                 <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -28,10 +28,10 @@
             <button type="button" onclick="createUser()">Sign Up</button>
         </form>
     </div>
-    
-{#    sign in #}
+
+    {#    sign in #}
     <div class="form-container sign-in-container">
-        <form action="#">
+        <form action="#" id="signInform">
             <h1>Sign in</h1>
             <div class="social-container">
                 <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -39,10 +39,10 @@
                 <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
             </div>
             <span>or use your account</span>
-            <input type="email" placeholder="Email"/>
-            <input type="password" placeholder="Password"/>
+            <input type="text" placeholder="Username" name="username"/>
+            <input type="password" placeholder="Password" name="password"/>
             <a href="#">Forgot your password?</a>
-            <button>Sign In</button>
+            <button type="button" onclick="signIn()">Sign In</button>
         </form>
     </div>
     <div class="overlay-container">
@@ -72,4 +72,5 @@
 </body>
 <script src="{% static 'js/signUpSignInCreated.js' %}"></script>
 <script src="{% static 'js/crateUserFunctionFetch.js' %}"></script>
+<script src="{% static 'js/signInFunctionFetch.js' %}"></script>
 </html>

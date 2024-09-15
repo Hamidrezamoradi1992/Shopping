@@ -4,10 +4,14 @@
     </div>
     <div class="flex-none">
         <ul class="menu menu-horizontal px-1">
+            <li> {{ request.user.username }}</li>
+
             <li>
+
                 <details>
                     <summary>Parent</summary>
                     <ul class="menu bg-black-200 rounded-box w-48 z-100">
+                        
                         {% for i in categories %}
                             <li><a href="{% url 'cat' category_id=i.id %}">{{ i.name }} </a></li>
                         {% endfor %}
@@ -17,7 +21,15 @@
             {% for i in menu %}
                 <li><a href="{{ i.link }}">{{ i.title }}</a></li>
             {% endfor %}
-
+          
+            {% if request.user.is_authenticated %}
+            	<li><a href="{% url 'logout' %}">logout</a></li>
+            {% else %}
+            	   <li><a href="accounts/">login</a></li>
+            {% endif %} 
+            
+         
+           
         </ul>
     </div>
 </div>
