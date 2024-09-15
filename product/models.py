@@ -39,48 +39,26 @@ class Category(models.Model):
     parent_category = models.ForeignKey(
         'self', on_delete=models.CASCADE, null=True, blank=True, related_name='subcategories'
     )
+    mapping_category = models.CharField(max_length=255, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        id_end = Category.objects.all().order_by("-id").first()
+        if self.parent_category:
+            mapping = Category.objects.filter(id=self.parent_category.id).values('mapping_category')
+            self.mapping_category = f'{mapping[0]["mapping_category"]}-{id_end.id + 1}-' \
+                if self.id is None else f'{mapping[0]["mapping_category"]}-{self.id}-'
+            super().save(*args, **kwargs)
+        else:
+            self.mapping_category = f'{id_end.id + 1}-' if self.id is None else f'{self.id}-'
+            super().save(*args, **kwargs)
 
     class Meta:
 
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
-
-    def __str__(self):
-
-        return self.name
-
-    @staticmethod
-    def calculate_max_depth(root_category):
-
-        if not root_category.subcategories.exists():
-            return 0
-        else:
-            return 1 + max(Category.calculate_max_depth(sub) for sub in root_category.subcategories.all())
-
-    def get_descendants(self, include_self=False, levels=None):
-
-        if levels is None:
-            levels = Category.calculate_max_depth(self)
-
-        result = [self] if include_self else []
-        queryset = Category.objects.all()
-
-        for _ in range(levels):
-            queryset = queryset.prefetch_related('subcategories')
-
-        categories = queryset.filter(id=self.id)
-
-        def collect_categories(category, current_level):
-
-            if current_level > 0:
-                for subcategory in category.subcategories.all():
-                    result.append(subcategory)
-                    collect_categories(subcategory, current_level - 1)
-
-        for category in categories:
-            collect_categories(category, levels)
-
-        return result
 
 
 class Brand(models.Model):

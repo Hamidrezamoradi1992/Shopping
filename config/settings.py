@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     # my app
     "core",
     "product",
-    "user",
     "account",
 
     # extra app
@@ -121,8 +120,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT_custom = BASE_DIR / 'static'
+STATIC_URL = 'storage/static/'
+STATIC_ROOT_custom = BASE_DIR / 'storage/static'
 if DEBUG:
     STATICFILES_DIRS = [STATIC_ROOT_custom]
 else:
