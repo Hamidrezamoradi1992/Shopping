@@ -1,14 +1,15 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, User
 
 
 # Create your models here.
 class Human(models.Model):
-    name = models.CharField(max_length=50)
-    family = models.CharField(max_length=50)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50,default=None)
+    family = models.CharField(max_length=50,default=None)
     age = models.IntegerField(null=True, blank=True)
     zipcode = models.CharField(max_length=10)
-    phone = models.CharField(max_length=12)
+    phone = models.CharField(max_length=12,default=None)
     city = models.ForeignKey('City', on_delete=models.SET_NULL, null=True, blank=True)
     picture = models.ImageField(upload_to=f"images/")
     update_at = models.DateTimeField(auto_now=True)
@@ -16,13 +17,10 @@ class Human(models.Model):
     deleted = models.BooleanField(default=False)
 
     def __str__(self):
-        return (f"name:{self.name} - family:{self.family} - age:{self.age} - zipcode:{self.zipcode}"
-                f"phone:{self.phone},deleted:{self.deleted}"
-                f" update_at:{self.update_at.strftime('%Y-%m-%d %H:%M:%S')},created_at:{self.created_at.strftime(
-                    '%Y-%m-%d%H:%M:%S')}")
+        return (f"name:{self.name} - family:{self.family} - age:{self.age}"
+                f" - zipcode:{self.zipcode}")
 
     class Meta:
-        ordering = ['-created_at']
         verbose_name = "person"
         verbose_name_plural = "people"
 
@@ -51,4 +49,4 @@ class City(models.Model):
     class Meta:
         ordering = ['name']
         verbose_name = "city"
-        verbose_name_plural = "cities"
+        verbose_name_plural = "city"
