@@ -24,7 +24,7 @@ from product import apps
 urlpatterns = ([
     path('admin/', admin.site.urls),
     path('', include('product.urls')),
-    path('accounts/', include('core.urls')),
+    path('core/', include('core.urls')),
     path('accounts/', include('account.urls')),
 ])
 if settings.DEBUG:
