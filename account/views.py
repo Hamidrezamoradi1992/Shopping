@@ -7,12 +7,11 @@ from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
 from django.http.response import HttpResponse, JsonResponse
 
+
 # Create your views here.
 
 def setPageSingInSingUp(request):
     return render(request, 'login.html')
-
-
 
 
 @csrf_exempt
@@ -61,14 +60,18 @@ def loginUser(request):
         password = request.POST.get("password", None)
         if user := authenticate(request, username=username, password=password):
             login(request, user)
-            return HttpResponse("welcome",status=201)
+            return HttpResponse("welcome", status=201)
         return HttpResponse({'username or password id not fond'}, status=status.HTTP_406_NOT_ACCEPTABLE)
-    return HttpResponse({ 'bad request'}, status=status.HTTP_400_BAD_REQUEST)
+    return HttpResponse({'bad request'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 def logoutUser(request):
     logout(request)
     return redirect('/')
 
+def accountView(request):
+    return render(request,'profileUser.html')
 
-
+@api_view(['get'])
+def accountUser(request):
+    return render()
