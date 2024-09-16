@@ -1,14 +1,15 @@
 {% extends '_base.html' %}
+{% load static %}
 {% block title %}
     product detail
 {% endblock %}
 
 {% block content %}
-    
-        <div id="product" class=""></div>
-        <div id="technical" class=""></div>
-        <div id="propose_product" class=" grid grid-cols-5 gap-5 col-span-2 justify-items-center m-20"></div>
-        <div id="comment" class=""></div>
+
+    <div id="product" class=""></div>
+    <div id="technical" class=""></div>
+    <div id="propose_product" class=" grid grid-cols-5 gap-5 col-span-2 justify-items-center m-20"></div>
+    <div id="comment" class=""></div>
 
 
 {% endblock %}
@@ -19,6 +20,7 @@
         {% include 'jsProductView/productDetailOne.js' %}
         {% include 'jsProductView/technicalProduct.js' %}
         {% include 'jsProductView/categoryProposeProductDetile.js' %}
+
         function plus() {
             var preValue = document.getElementById("counter").value;
             document.getElementById("counter").value = parseInt(preValue) + 1;
@@ -36,4 +38,5 @@
         }
 
     </script>
+    <script src="{% static 'js/bags/bagsAddProduct.js' %}"></script>
 {% endblock %}

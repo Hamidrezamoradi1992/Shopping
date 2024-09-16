@@ -1,9 +1,12 @@
 from django.shortcuts import render, get_object_or_404
+from bags.models import Order, OrderItem
 from product.models import Product, Brand, Category, Technical_Characteristics
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 from product.serializers import ProductSerializer, Technical_CharacteristicsSerializer
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -66,3 +69,26 @@ def category_approachـproduct_list_view(request, category_id, product_id):
         serializer = ProductSerializer(product, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@csrf_exempt
+@api_view(['POST'])
+def addBagsview(request):
+    print(request.data)
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            product_id = request.POST.get('product_id')
+            count = request.POST.get('count')
+            order_new_created, create = Order.objects.get_or_create(user_id=request.user.id, is_paid=False,
+                                                                    on_delete=False)
+            content_order = order_new_created.orderitem_set.filter(product_id=product_id).first()
+            if content_order == None:
+                print(content_order)
+                OrderItem.objects.create(order_id=order_new_created.id, product_id=product_id,product_count=int(count))
+                return HttpResponse(status=status.HTTP_201_CREATED)
+            else:
+                content_order.product_count += int(count)
+                content_order.save()
+            return HttpResponse(status=status.HTTP_409_CONFLICT)
+        return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
+    return HttpResponse(status=status.HTTP_405_METHOD_NOT_ALLOWED)

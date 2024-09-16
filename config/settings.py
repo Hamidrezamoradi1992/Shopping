@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     "core",
     "product",
     "account",
-    "bags"
+    "bags",
 
     # extra app
     "rest_framework",

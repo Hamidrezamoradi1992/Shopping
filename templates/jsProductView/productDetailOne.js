@@ -43,8 +43,22 @@ document.addEventListener('DOMContentLoaded', function (event) {
                     <p class="font-normal text-base leading-6 text-gray-600  mt-7">  ${descriptionss}</p> 
                     <p class="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 mt-6 dark:text-white">ریال ${productes.product_data.price}</p>
 
-      
-                    <button class="focus:outline-none focus:ring-2 hover:bg-black focus:ring-offset-2 focus:ring-gray-800 font-medium text-base leading-4 text-white bg-gray-800 w-full py-5 lg:mt-12 mt-6 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100">Add to shopping bag (coming sune)</button>
+                   <form  id="add_bags" class="mt-10">
+                                    {% csrf_token %}
+                             <div class="flex flex-row justify-between">
+                            <p class="font-medium text-base leading-4 text-gray-600 ">Select quantity</p>
+                            <div class="flex">
+                                <span onclick="minus()" class="focus:outline-none dark:text-white focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer border border-gray-300 border-r-0 w-7 h-7 flex items-center justify-center pb-1">-</span>
+                                <input id="counter" name="count" aria-label="input" class="border dark:text-white border-gray-300 dark:bg-transparent h-full text-center w-14 pb-1" type="text" value="1" />
+                                <span onclick="plus()" class="focus:outline-none dark:text-white focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer border border-gray-300 border-l-0 w-7 h-7 flex items-center justify-center pb-1">+</span>
+                            </div>
+                        </div>   
+                            <input type="text" class="!hidden" value="${productes.product_data.id}" name="product_id" >
+                            <button onclick="bagsProduct()" class="focus:outline-none focus:ring-2 hover:bg-black focus:ring-offset-2 focus:ring-gray-800 font-medium text-base leading-4 text-white bg-gray-800 w-full py-5 lg:mt-12 mt-6 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100">Add to shopping bag</button>
+                    </form>
+                            
+                       
+                       
                 </div>
       
                 <!-- Preview Images Div For larger Screen-->

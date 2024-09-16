@@ -7,13 +7,12 @@ from .models import Order, OrderItem
 class OrderAdmin(admin.ModelAdmin):
     model = Order
     list_display = ('id', 'user', 'is_paid', 'on_delete')
-    search_fields = 'user'
+    search_fields = ['user']
     list_filter = ('is_paid', 'on_delete')
 
 
 @admin.register(OrderItem)
-class OrderItemInLine(admin.TabularInline):
+class OrderItemInLine(admin.ModelAdmin):
     model = OrderItem
-    extra = 1
-    max_num = 1
-    min_num = 1
+    list_display = ('order', 'product', 'total_price', 'product_count')
+    search_fields = ['__all__']

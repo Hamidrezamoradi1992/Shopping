@@ -14,4 +14,6 @@ urlpatterns = [
     path('product/detail/api/pruductdetaile/approach/<int:category_id>/<int:product_id>',
          views.category_approachـproduct_list_view,name='product_approach_api'),
 
+    path('product/detail/api/product-add-order/', views.addBagsview),
+
 ]
