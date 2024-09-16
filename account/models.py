@@ -5,13 +5,13 @@ from django.contrib.auth.models import AbstractUser, User
 # Create your models here.
 class Human(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50,default=None)
-    family = models.CharField(max_length=50,default=None)
+    name = models.CharField(max_length=50,default="",null=True,blank=True)
+    family = models.CharField(max_length=50,null=True,blank=True)
     age = models.IntegerField(null=True, blank=True)
-    zipcode = models.CharField(max_length=10)
-    phone = models.CharField(max_length=12,default=None)
+    zipcode = models.CharField(max_length=10, null=True, blank=True)
+    phone = models.CharField(max_length=12,null=True,blank=True,default='not entered')
     city = models.ForeignKey('City', on_delete=models.SET_NULL, null=True, blank=True)
-    picture = models.ImageField(upload_to=f"images/")
+    picture = models.ImageField(upload_to=f"images/", default='products/LOQ_15IRX9.webp')
     update_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
     deleted = models.BooleanField(default=False)

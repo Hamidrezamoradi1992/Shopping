@@ -6,6 +6,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
 from django.http.response import HttpResponse, JsonResponse
+from .serializer import userSerializer, AccountUserSerializer
+
+from account.models import Human
 
 
 # Create your views here.
@@ -69,9 +72,27 @@ def logoutUser(request):
     logout(request)
     return redirect('/')
 
-def accountView(request):
-    return render(request,'profileUser.html')
 
-@api_view(['get'])
+def accountView(request):
+    return render(request, 'profileUser.html')
+
+
+@api_view(['GET'])
 def accountUser(request):
-    return render()
+    if request.method == 'GET':
+        user_profile, flag_user = Human.objects.get_or_create(user_id=request.user.id)
+
+
+        if flag_user:
+            user = User.objects.get(id=request.user.id)
+            Userdata = AccountUserSerializer(user)
+            print(Userdata)
+            serializer = userSerializer(user_profile)
+            return Response({"account": serializer.data, 'user': Userdata.data}, status=status.HTTP_200_OK)
+        else:
+            user=User.objects.get(id=request.user.id)
+            Userdata = AccountUserSerializer(user)
+            print(Userdata)
+            serializer = userSerializer(user_profile)
+            return Response({"account": serializer.data, 'user': Userdata.data}, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
