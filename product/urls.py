@@ -15,5 +15,8 @@ urlpatterns = [
          views.category_approachـproduct_list_view,name='product_approach_api'),
 
     path('product/detail/api/product-add-order/', views.addBagsview),
+    path('product/detail/order-items/api/order-items/', views.cardShopingWithAllOrderItems),
+    path('product/detail/order-items/', views.cardShopingWithAllOrderItemsView, name='cardShoppingWithAllOrderItemsView'),
+    path('product/detail/order-items/paid', views.cardShopingPaidView, name='cardShoppingPaidView'),
 
 ]

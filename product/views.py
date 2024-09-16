@@ -1,11 +1,11 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from bags.models import Order, OrderItem
 from product.models import Product, Brand, Category, Technical_Characteristics
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 from product.serializers import ProductSerializer, Technical_CharacteristicsSerializer
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -84,7 +84,7 @@ def addBagsview(request):
             content_order = order_new_created.orderitem_set.filter(product_id=product_id).first()
             if content_order == None:
                 print(content_order)
-                OrderItem.objects.create(order_id=order_new_created.id, product_id=product_id,product_count=int(count))
+                OrderItem.objects.create(order_id=order_new_created.id, product_id=product_id, product_count=int(count))
                 return HttpResponse(status=status.HTTP_201_CREATED)
             else:
                 content_order.product_count += int(count)
@@ -92,3 +92,38 @@ def addBagsview(request):
             return HttpResponse(status=status.HTTP_409_CONFLICT)
         return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
     return HttpResponse(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+@csrf_exempt
+@api_view(['GET'])
+def cardShopingWithAllOrderItems(request):
+    if request.method == 'GET':
+        try:
+            order_new_created = Order.objects.get(user_id=request.user.id, is_paid=False, on_delete=False)
+            product = order_new_created.orderitem_set.all()
+            data_json = [dict(product_name=products.product.name, product_price=products.product.price,
+                              count=products.product_count, total=products.product.price * products.product_count,
+                              imge=products.product.picture.url) for
+                         products in product]
+            print(data_json)
+            return JsonResponse(data_json, safe=False, status=status.HTTP_200_OK)
+        except Order.DoesNotExist:
+                return HttpResponse('Your shopping cart is empty', status=status.HTTP_406_NOT_ACCEPTABLE)
+    return HttpResponse(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+def cardShopingWithAllOrderItemsView(request):
+    return render(request, 'shopingWithProduct.html')
+def cardShopingPaidView(request):
+    order_new_created = Order.objects.get(user_id=request.user.id, is_paid=False, on_delete=False)
+    product = order_new_created.orderitem_set.all()
+    if order_new_created is not None:
+        for products in product:
+            order_item=OrderItem.objects.get(product_id=products.product_id)
+            order_item.total_price= products.product.price * products.product_count
+            order_item.save()
+
+        order_new_created.is_paid=True
+        order_new_created.save()
+        return redirect('index')
+    return HttpResponse(status=status.HTTP_404_NOT_FOUND)
