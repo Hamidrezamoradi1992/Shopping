@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.shortcuts import render, get_object_or_404, redirect
 from bags.models import Order, OrderItem
 from product.models import Product, Brand, Category, Technical_Characteristics
@@ -108,22 +110,29 @@ def cardShopingWithAllOrderItems(request):
             print(data_json)
             return JsonResponse(data_json, safe=False, status=status.HTTP_200_OK)
         except Order.DoesNotExist:
-                return HttpResponse('Your shopping cart is empty', status=status.HTTP_406_NOT_ACCEPTABLE)
+            return HttpResponse('Your shopping cart is empty', status=status.HTTP_406_NOT_ACCEPTABLE)
     return HttpResponse(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
 def cardShopingWithAllOrderItemsView(request):
     return render(request, 'shopingWithProduct.html')
+
+
 def cardShopingPaidView(request):
     order_new_created = Order.objects.get(user_id=request.user.id, is_paid=False, on_delete=False)
     product = order_new_created.orderitem_set.all()
     if order_new_created is not None:
+        total_price_orders = 0
         for products in product:
-            order_item=OrderItem.objects.get(product_id=products.product_id)
-            order_item.total_price= products.product.price * products.product_count
+            order_item = OrderItem.objects.get(product_id=products.product_id)
+            total_price = products.product.price * products.product_count
+            order_item.total_price += total_price
+            total_price_orders += total_price
             order_item.save()
-
-        order_new_created.is_paid=True
+        print(total_price_orders)
+        order_new_created.is_paid = True
+        order_new_created.date = datetime.now()
+        order_new_created.total_price = total_price_orders
         order_new_created.save()
         return redirect('index')
     return HttpResponse(status=status.HTTP_404_NOT_FOUND)

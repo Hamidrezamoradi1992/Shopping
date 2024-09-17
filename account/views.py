@@ -5,7 +5,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
-from django.http.response import HttpResponse, JsonResponse
+from django.http.response import HttpResponse
 from .serializer import userSerializer, AccountUserSerializer, CitySerializer
 
 from account.models import Human, City
