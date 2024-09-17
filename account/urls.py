@@ -11,4 +11,5 @@ urlpatterns = [
     path('accounts/user-profile', views.accountUser, name='contentUserProfile'),
     path('accounts/city', views.cityView, name='allCity'),
     path('accounts/user', views.profileUpdate, name='45551'),
+    path('accounts/order-list', views.orderItems, name='order-list'),
 ]

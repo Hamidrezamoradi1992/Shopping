@@ -6,6 +6,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
 from django.http.response import HttpResponse
+
+from bags.models import OrderItem, Order
+from bags.serializer import OrderSerializer
 from .serializer import userSerializer, AccountUserSerializer, CitySerializer
 
 from account.models import Human, City
@@ -117,7 +120,18 @@ def profileUpdate(request):
         if serializer.is_valid():
             print('hamid')
             serializer.save()
-
+            return Response(status=status.HTTP_200_OK)
         else:
             print(serializer.errors)
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+            return Response(status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def orderItems(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            oredrs=Order.objects.filter(user_id=request.user.id)
+            serializer = OrderSerializer(oredrs, many=True)
+            print(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
