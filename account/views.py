@@ -6,7 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
 from django.http.response import HttpResponse, JsonResponse
-from .serializer import userSerializer, AccountUserSerializer,CitySerializer
+from .serializer import userSerializer, AccountUserSerializer, CitySerializer
 
 from account.models import Human, City
 
@@ -81,27 +81,43 @@ def accountView(request):
 def accountUser(request):
     if request.method == 'GET':
         user_profile, flag_user = Human.objects.get_or_create(user_id=request.user.id)
-
-
+        print(flag_user)
         if flag_user:
+            try:
+                user = User.objects.get(id=request.user.id)
+                Userdata = AccountUserSerializer(user)
+                serializer = userSerializer(user_profile)
+                return Response({"account": serializer.data, 'user': Userdata.data}, status=status.HTTP_200_OK)
+            except AssertionError as e:
+                pass
+        else:
             user = User.objects.get(id=request.user.id)
             Userdata = AccountUserSerializer(user)
-            human=Human.objects.filter(user_id=request.user.id)
-            city=human.city_set.name
-            print(city)
-            print(Userdata)
             serializer = userSerializer(user_profile)
-            return Response({"account": serializer.data, 'user': Userdata.data}, status=status.HTTP_200_OK)
-        else:
-            user=User.objects.get(id=request.user.id)
-            Userdata = AccountUserSerializer(user)
-            print(Userdata)
-            serializer = userSerializer(user_profile)
-            print(serializer.data)
-            human = Human.objects.get(user_id=request.user.id)
-            city=City.objects.get(id=human.city.id)
-            city_serializer= CitySerializer(city )
-            country = human.city.country
-            print(city_serializer)
-            return Response({"account": serializer.data, 'user': Userdata.data,'city':city_serializer.data}, status=status.HTTP_200_OK,content_type={"country":country})
+            return Response({"account": serializer.data, 'user': Userdata.data},
+                            status=status.HTTP_200_OK)
     return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+
+
+@api_view(['GET'])
+def cityView(request):
+    if request.method == 'GET':
+        city = City.objects.all()
+        serializer = CitySerializer(city, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@csrf_exempt
+@api_view(['POST'])
+def profileUpdate(request):
+    if request.method == 'POST':
+        user = Human.objects.get(user_id=request.user.id)
+        serializer = userSerializer(user,data=request.data)
+        if serializer.is_valid():
+            print('hamid')
+            serializer.save()
+
+        else:
+            print(serializer.errors)
+        return Response(status=status.HTTP_400_BAD_REQUEST)

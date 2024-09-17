@@ -9,4 +9,6 @@ urlpatterns = [
     path('accounts/logut', views.logoutUser, name='logout'),
     path('accounts/view', views.accountView, name='templateUserView'),
     path('accounts/user-profile', views.accountUser, name='contentUserProfile'),
+    path('accounts/city', views.cityView, name='allCity'),
+    path('accounts/user', views.profileUpdate, name='45551'),
 ]
