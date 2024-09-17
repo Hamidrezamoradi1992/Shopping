@@ -6,9 +6,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
 from django.http.response import HttpResponse, JsonResponse
-from .serializer import userSerializer, AccountUserSerializer
+from .serializer import userSerializer, AccountUserSerializer,CitySerializer
 
-from account.models import Human
+from account.models import Human, City
 
 
 # Create your views here.
@@ -86,6 +86,9 @@ def accountUser(request):
         if flag_user:
             user = User.objects.get(id=request.user.id)
             Userdata = AccountUserSerializer(user)
+            human=Human.objects.filter(user_id=request.user.id)
+            city=human.city_set.name
+            print(city)
             print(Userdata)
             serializer = userSerializer(user_profile)
             return Response({"account": serializer.data, 'user': Userdata.data}, status=status.HTTP_200_OK)
@@ -94,5 +97,11 @@ def accountUser(request):
             Userdata = AccountUserSerializer(user)
             print(Userdata)
             serializer = userSerializer(user_profile)
-            return Response({"account": serializer.data, 'user': Userdata.data}, status=status.HTTP_200_OK)
+            print(serializer.data)
+            human = Human.objects.get(user_id=request.user.id)
+            city=City.objects.get(id=human.city.id)
+            city_serializer= CitySerializer(city )
+            country = human.city.country
+            print(city_serializer)
+            return Response({"account": serializer.data, 'user': Userdata.data,'city':city_serializer.data}, status=status.HTTP_200_OK,content_type={"country":country})
     return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
