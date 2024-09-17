@@ -15,12 +15,43 @@
 
         <div class="h-full ">
             <div class="border-b-2 block md:flex">
-                <div class="w-full min-h-[80vm] mt-3 p-4  bg-white shadow-md" id="containerOrderList">
+                <div class="w-full min-h-[80vm] mt-3 p-4  bg-white shadow-md">
+                    <div class="overflow-x-auto">
+                        <table class="table">
+                            <!-- head -->
+                            <thead>
+                            <tr>
+                                <th>
+                                    <label>
+                                        <input type="checkbox" class="checkbox"/>
+                                    </label>
+                                </th>
+                                <th>DATE</th>
+                                <th>TOTAL</th>
+                                <th>PAID</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody  id="containerOrderList">
 
+                                
+                            </tbody>
+                            <!-- foot -->
+                            <tfoot>
+                            <tr>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Job</th>
+                                <th>Favorite Color</th>
+                                <th></th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-     
+
     </div>
 
     <div id="formEdit" class=" flex justify-center items-center aline-center">
@@ -58,7 +89,7 @@
     <script src="{% static 'js/user/getContentUserProfile.js' %}"></script>
     <script src="{% static 'js/user/templateInUserView.js' %}"></script>
     <script src="{% static 'js/user/edutProfile.js' %}"></script>
+    <script src="{% static 'js/user/getFactorOrderUserInProfile.js' %}"></script>
 
 {% endblock %}
     
-   

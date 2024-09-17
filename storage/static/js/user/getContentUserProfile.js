@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", (ev) => {
                         <!--birtdate -->
                     <div>
                         <label for="bertdate" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">AGE</label>
-                        <input type="datetime-local" name="age"  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value="${contentUser.account.age}" required="">
+                        <input type="datetime-local" name="age"  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value="${contentUser.account.age}" >
                     </div>                 
                        <!--email -->
                     <div>
@@ -136,8 +136,8 @@ document.addEventListener("DOMContentLoaded", (ev) => {
                     </select>
                            <!--image -->
                     <div>
-                        <label for="image" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Zip Code</label>
-                        <input type="file"  name="picture"  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value="${contentUser.account.zipcode}" required="">
+                        <label for="image" class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">image</label>
+                        <input type="file"  name="picture"  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"  >
                     </div>
                     <button type="button" onclick="updateProfile()" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">update your account</button>
 
@@ -164,6 +164,8 @@ document.addEventListener("DOMContentLoaded", (ev) => {
             cityDetail.innerHTML = El
         }).catch(async err => {
             console.log(await err.text())
+        }).finally(()=>{
+            orderList()
         })
     })
 })
