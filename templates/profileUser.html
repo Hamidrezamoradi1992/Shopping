@@ -1,79 +1,64 @@
 {% extends '_base.html' %}
 {% load static %}
 {% block extra-head %}
-    <link href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css"  rel="stylesheet"  />
-   
+    <link href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css" rel="stylesheet"/>
+
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
-    
+
 {% endblock %}
 
 {% block content %}
-	<div class="h-full bg-gray-200 p-8" id="container-1">
-    </div>
-    <div id="formEdit" class=" flex justify-center items-center aline-center">
-        <div id="authentication-modal" class="!hidden overflow-x-hidden overflow-y-auto fixed h-modal md:h-full top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center ">
-        <div class="relative w-full max-w-md px-4 h-full md:h-auto">
-            <!-- Modal content -->
-            <div class="bg-white rounded-lg shadow relative dark:bg-gray-700">
-                <div class="flex justify-end p-2">
-                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" onclick="hiddenFunc()">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
-                    </button>
+    <div class="h-full bg-gray-200 p-8">
+        <div id="container-1">
+        </div>
+
+        <div class="h-full ">
+            <div class="border-b-2 block md:flex">
+                <div class="w-full min-h-[80vm] mt-3 p-4  bg-white shadow-md" id="containerOrderList">
+
                 </div>
-                <form action="#" class="space-y-6 px-6 lg:px-8 pb-4 sm:pb-6 xl:pb-8" id="formAccontUpdate">
-                    {% csrf_token %}
-                </form>
             </div>
         </div>
-    </div> 
-
-                  
+     
     </div>
+
+    <div id="formEdit" class=" flex justify-center items-center aline-center">
+        <div id="authentication-modal"
+             class="!hidden overflow-x-hidden overflow-y-auto fixed h-modal md:h-full top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center ">
+            <div class="relative w-full max-w-md px-4 h-full md:h-auto">
+                <!-- Modal content -->
+                <div class="bg-white rounded-lg shadow relative dark:bg-gray-700">
+                    <div class="flex justify-end p-2">
+                        <button type="button"
+                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                                onclick="hiddenFunc()">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <form action="#" class="space-y-6 px-6 lg:px-8 pb-4 sm:pb-6 xl:pb-8" id="formAccontUpdate">
+                        {% csrf_token %}
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
 {% endblock %}
 
 {% block script %}
-   <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>
+    <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>
     <script src="{% static 'js/user/getContentUserProfile.js' %}"></script>
-   
-    <script>
-
-            const DATA_SET_VERTICAL_BAR_CHART_1 = [68.106, 26.762, 94.255, 72.021, 74.082, 64.923, 85.565, 32.432, 54.664, 87.654, 43.013, 91.443];
-
-            const labels_vertical_bar_chart = ['January', 'February', 'Mart', 'April', 'May', 'Jun', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-            const dataVerticalBarChart= {
-                labels: labels_vertical_bar_chart,
-                datasets: [
-                    {
-                        label: 'Revenue',
-                        data: DATA_SET_VERTICAL_BAR_CHART_1,
-                        borderColor: 'rgb(54, 162, 235)',
-                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                    }
-                ]
-            };
-            const configVerticalBarChart = {
-                type: 'bar',
-                data: dataVerticalBarChart,
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        },
-                        title: {
-                            display: true,
-                            text: 'Last 12 Months'
-                        }
-                    }
-                },
-            };
-
-    
-        </script>
+    <script src="{% static 'js/user/templateInUserView.js' %}"></script>
     <script src="{% static 'js/user/edutProfile.js' %}"></script>
-    
+
 {% endblock %}
     
    
