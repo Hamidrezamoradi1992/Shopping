@@ -6,6 +6,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css"/>
+
     <link href="{% static 'css/signUpSignIn.css' %}" rel="stylesheet" type="text/css">
     <script src="{% static 'js/sussssss.js' %}"></script>
     <title>register</title>
@@ -41,7 +43,7 @@
             <span>or use your account</span>
             <input type="text" placeholder="Username" name="username"/>
             <input type="password" placeholder="Password" name="password"/>
-            <a href="#">Forgot your password?</a>
+            <a href="{% url 'index' %}" class="btn btn-ghost">go to Home page</a>
             <button type="button" onclick="signIn()">Sign In</button>
         </form>
     </div>

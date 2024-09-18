@@ -1,26 +1,35 @@
 {% extends '_base.html' %}
+{% load static %}
 {% block title %}
-	Category
+    Category
 {% endblock %}
 {% block content %}
-    <div class="w-[80vw] h-auto grid grid-cols-4 gap-5 col-span-2 justify-items-center m-auto">
-	{% for product in all_product_category %}
-	    <a href="{% url 'product_detail_page' pk=product.id %}" target="_blank"> <div class="relative w-64 p-4 h-40 overflow-hidden bg-white shadow-lg rounded-2xl">
-                            <img alt="moto" src="{{ product.picture.url}}" class="absolute w-36 h-36 mb-4 -right-10 -bottom-8"/>
-                            <div class="w-4/6">
-                                <p class="mb-2 text-lg font-medium text-gray-800">
-                                    {{product.name|default:""}}
-                                </p>
-                                <p class="text-xs text-gray-400">
-                                    {{product.short_description|default:""}}
-                                </p>
-                                <p class="text-xl font-medium text-indigo-500">
-                                    ${{product.price}}
-                                </p>
-                            </div>
+    <div class="w-[90vw] h-auto grid grid-cols-5 gap-5 justify-items-center m-auto">
+        {% for product in all_product_category %}
+            
+                <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 justify-between">
+                    <a href="">
+                        <img class="p-8 rounded-t-lg" src="{{ product.picture.url }}" alt="product image"/>
+                    </a>
+                    <div class="px-5 pb-5">
+                        <a href="{% url 'product_detail_page' pk=product.id %}">
+                            <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{ product.name|default:"" }}</h5>
+                        </a>
+                        <p class="text-xs text-gray-400">
+                            {{ product.short_description|default:"" }}
+                        </p>
+                    
+                        <div class="flex items-center justify-between justify-end ">
+                            <span class="text-3xl font-bold text-gray-900 dark:text-white">$${{ product.price|default:0 }}</span>
+                            <a href="{% url 'product_detail_page' pk=product.id %}"
+                               class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                to detail</a>
                         </div>
-                       </a>
-        
-	{% endfor %}
-	</div>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+{% block script %}
+   
 {% endblock %}

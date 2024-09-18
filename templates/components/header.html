@@ -46,7 +46,7 @@
             <li>
                 <details>
                     <summary>Parent</summary>
-                    <ul class="menu bg-black-200 rounded-box w-48 z-100">
+                    <ul class="menu bg-black-200 rounded-box w-48 z-10">
                         
                         {% for i in categories %}
                             <li><a href="{% url 'cat' category_id=i.id %}">{{ i.name }} </a></li>
@@ -74,11 +74,11 @@
         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
         <li>
           <a class="justify-between">
-            Profile
+            coming sun
             <span class="badge">New</span>
           </a>
         </li>
-        <li><a href="{% url 'templateUserView' %}">Settings</a></li>
+        <li><a href="{% url 'templateUserView' %}">Profile</a></li>
         <li><a href="{% url 'logout' %}">logout</a></li>
       </ul>
     </div>

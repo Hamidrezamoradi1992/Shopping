@@ -92,7 +92,7 @@ def addBagsview(request):
                 content_order.product_count += int(count)
                 content_order.save()
             return HttpResponse(status=status.HTTP_409_CONFLICT)
-        return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
+        return HttpResponse(status=status.HTTP_406_NOT_ACCEPTABLE)
     return HttpResponse(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
@@ -124,7 +124,8 @@ def cardShopingPaidView(request):
     if order_new_created is not None:
         total_price_orders = 0
         for products in product:
-            order_item = OrderItem.objects.get(product_id=products.product_id)
+            id_product=products.product_id
+            order_item = OrderItem.objects.get(order_id=order_new_created.id,product_id=id_product)
             total_price = products.product.price * products.product_count
             order_item.total_price += total_price
             total_price_orders += total_price

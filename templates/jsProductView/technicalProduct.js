@@ -9,11 +9,12 @@ function technicalProduct(value) {
             }
         }).then(async (response) => {
             const dataTechnical = await response.json()
-            console.log(dataTechnical)
+            let string=dataTechnical.description
+            console.log(string)
             technical.innerHTML = `
                 <div class="flex w-full flex-col items-center justify-center content-center">
                     <div class=" w-[90vw] card bg-base-300 rounded-box grid h-20 place-items-center p-51 h-auto">
-                        ${dataTechnical.description}
+                       <textarea class="w-[90vw] min-h-[24rem]  rounded-box p-10" style="direction: rtl"> ${string} </textarea>
                       </div>
                </div>
             `

@@ -9,9 +9,10 @@
             }).then(async data=>{
                 const products=await data.json()
                 let el=""
-                for(let r in products){
-                   console.log(r);
+
                    console.log(products)
+                for(let r in products){
+
 
                    const card=`
                    

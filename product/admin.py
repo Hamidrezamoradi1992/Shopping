@@ -10,13 +10,15 @@ class ProductAdmin(admin.ModelAdmin):
     model = Product
     list_display = ('name', 'price', 'category', 'brands', 'active', 'stock')
     list_filter = ('category', 'brands', 'price', 'active', 'stock')
-
+    search_fields = ['name']
+    list_editable = ['active', 'stock']
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     model = Category
     list_display = ['name']
     list_filter = ['name']
+    search_fields = ['name']
 
 
 @admin.register(Brand)

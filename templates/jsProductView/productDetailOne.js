@@ -4,9 +4,9 @@ const propose = document.querySelector('#propose_product')
 const comment = document.querySelector("#comment")
 let pkCategory=0
 let pkProduct=0
-
 document.addEventListener('DOMContentLoaded', function (event) {
     event.preventDefault()
+
     fetch(`api/pruductdetaile/${id}`, {
         method: 'GET',
         headers: {

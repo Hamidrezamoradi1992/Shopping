@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-
+    <input class="!hidden" value="{% if request.user.is_authenticated %}1{% else %}0{% endif %}" id="hamid22"><input/>
     <div id="product" class=""></div>
     <div id="technical" class=""></div>
     <div id="propose_product" class=" grid grid-cols-5 gap-5 col-span-2 justify-items-center m-20"></div>
@@ -15,7 +15,10 @@
 {% endblock %}
 
 {% block script %}
+    <script src="{% static 'js/sussssss.js' %}"></script>
     <script>
+        let hamid22=document.querySelector('#hamid22').value
+        console.log(hamid22)
         let id = {{pk}}
         {% include 'jsProductView/productDetailOne.js' %}
         {% include 'jsProductView/technicalProduct.js' %}
@@ -39,4 +42,5 @@
 
     </script>
     <script src="{% static 'js/bags/bagsAddProduct.js' %}"></script>
+     
 {% endblock %}

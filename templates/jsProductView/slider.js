@@ -3,20 +3,7 @@ document.addEventListener('alpine:init', () => {
 
     Alpine.data('slider', () => (
 
-    fetch('accounts/api/slider', {
-        method: "GET",
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-            'X-CSRFToken': '{{ csrf_token }}',
-        }
-    }).then(async (response) => {
-        const img = await response.json()
-        console.log(img)
-        for (i in img) {
-            image.push(img[i].picture)
-        }
-        console.log(image)
-    }),
+
         {
             currentIndex: 1,
             images: ["/media/slider/how-to-become-software-engineer.jpg",
