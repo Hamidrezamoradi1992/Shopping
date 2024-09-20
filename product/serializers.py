@@ -23,14 +23,15 @@ class ProductSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields=[
+        fields = [
             'name',
         ]
+
 
 class BrandSerializer(serializers.ModelSerializer):
     class Meta:
         model = Brand
-        fields=[
+        fields = [
             'name',
         ]
 
@@ -38,7 +39,6 @@ class BrandSerializer(serializers.ModelSerializer):
 class Technical_CharacteristicsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Technical_Characteristics
-        fields=[
+        fields = [
             'description',
         ]
-
